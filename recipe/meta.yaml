@@ -1,3 +1,4 @@
+{% set python_min = '3.11' %}
 {% set name = "mcdev" %}
 {% set version = "1.1.0" %}
 
@@ -14,15 +15,15 @@ build:
     - mcdev = mcdev:mcma.main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
+  number: 2
 
 requirements:
   host:
-    - python >=3.11,<3.12
+    - python {{ python_min }}
     - setuptools >=61.0
     - pip
   run:
-    - python >=3.11,<3.12
+    - python >={{ python_min }},<3.12
     - pyomo ==6.7.1
     - pyyaml
     - seaborn
@@ -42,6 +43,7 @@ test:
     - mcdev --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/marek-iiasa/mcdev
